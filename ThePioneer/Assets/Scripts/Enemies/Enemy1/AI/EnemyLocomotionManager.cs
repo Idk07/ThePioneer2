@@ -102,21 +102,25 @@ namespace MV {
 
             if (enemyManager.isPerformingAction == true) {
                 navMeshAgent.enabled = false;
-                enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                enemyAnimatorManager.anim.SetBool("IsWalking",false);
+                
                 
             } else {
                
-                if(distanceFromTargetAttack > stoppingDistance) {
-                    
-                    enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);            
+                if(distanceFromTargetAttack2 >= 1.5f) {
+                  
+                    enemyAnimatorManager.anim.SetBool("IsWalking", true);
+                  //  HandleRotateTowardsTarget();
 
-                } else if(distanceFromTargetAttack <= stoppingDistance) {
-                    
-                    enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                } else {
+                   
+                    enemyAnimatorManager.anim.SetBool("IsWalking", false);
+                   
+                   
                 }
             }
-
-            HandleRotateTowardsTarget();
+            
+           HandleRotateTowardsTarget();
 
          //navMeshAgent.transform.localPosition = Vector3.zero;
          //  navMeshAgent.transform.localRotation = Quaternion.identity;

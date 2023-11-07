@@ -15,12 +15,7 @@ public class EnemyColliderWeapon : MonoBehaviour
         damageCollider.gameObject.SetActive(true);
 
         damageCollider.isTrigger = true;
-        //EN TEORIA ESOS DE ABAJO DEBERIAN DE IR PERO SI LOS PONGO NO CAPTA LA COLISION, creo que es porque falta tambien
-        //puso codigo en algo de las armas peeeero puede que no tenga mucho que ver pero de momento funciona :D
-        //damageCollider.isTrigger = true;
-        //damageCollider.enabled = false;
-
-        //print("Awake");
+        
     }
 
    
@@ -52,7 +47,7 @@ public class EnemyColliderWeapon : MonoBehaviour
             return;
         }
 
-        print("WeaponEnemy:TocoAlgo");
+      //  print("WeaponEnemy:TocoAlgo");
         if (collision.CompareTag("Player")) {
             TestPlayerStats playerStats = collision.GetComponent<TestPlayerStats>();
          
@@ -63,7 +58,7 @@ public class EnemyColliderWeapon : MonoBehaviour
             if (playerStats != null) {
                 //el valor de damage se debe de sustituir por un script de CurrentWeaponDamage
                 playerStats.Damage(damage);
-                print("Weapon:HizoDañoAlPlayer");
+              //  print("Weapon:HizoDañoAlPlayer");
 
 
             }

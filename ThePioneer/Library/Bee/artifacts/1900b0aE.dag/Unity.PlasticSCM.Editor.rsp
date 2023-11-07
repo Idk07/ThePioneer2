@@ -118,9 +118,9 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"D:/Escuela/9no/Game/PracticumVideojuegos-ThePioneer/ThePioneer/Library/PackageCache/com.unity.collab-proxy@1.17.7/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
--r:"D:/Escuela/9no/Game/PracticumVideojuegos-ThePioneer/ThePioneer/Library/PackageCache/com.unity.collab-proxy@1.17.7/Lib/Editor/PlasticSCM/unityplastic.dll"
--r:"D:/Escuela/9no/Game/PracticumVideojuegos-ThePioneer/ThePioneer/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
+-r:"D:/Escuela/9no/Game/ThePioneer2/ThePioneer/Library/PackageCache/com.unity.collab-proxy@1.17.7/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
+-r:"D:/Escuela/9no/Game/ThePioneer2/ThePioneer/Library/PackageCache/com.unity.collab-proxy@1.17.7/Lib/Editor/PlasticSCM/unityplastic.dll"
+-r:"D:/Escuela/9no/Game/ThePioneer2/ThePioneer/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
 -r:"D:/Un/2021.3.15f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 -r:"D:/Un/2021.3.15f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/Un/2021.3.15f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"

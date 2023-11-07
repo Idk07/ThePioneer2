@@ -1,3 +1,4 @@
+using MV;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,11 @@ public class AnimatorManager : MonoBehaviour
     public void PlayTargetAnimation(string targetAnim, bool isInteracting) {
         anim.applyRootMotion = isInteracting;
         anim.SetBool("IsInteracting", isInteracting);
-        anim.CrossFade(targetAnim, 0.2f);
+        anim.CrossFade(targetAnim, 0.1f);
+
+        if(EnemyManager.instanceEnemyManager.isPerformingAction ==false ) {
+
+            anim.SetBool("IsInteracting", false);
+        }
     }
 }

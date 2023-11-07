@@ -1983,7 +1983,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.55
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -2061,7 +2061,7 @@ MonoBehaviour:
   canSeePlayer: 0
   seeIt: 0
   stoppingDistance: 1.5
-  distanceFromTargetAttack: 0
+  distanceFromTargetAttack: 10
   distanceFromTargetAttack2: 0
   rotationSpeed: 80
 --- !u!114 &1554744892
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f733c37729191b6488f08ce2a9e470ac, type: 2}
   - {fileID: 11400000, guid: d4c85ec731ed8764c9f91c921a96e240, type: 2}
   - {fileID: 11400000, guid: 6daa56798a3a05a42bfa3054ad958c46, type: 2}
-  currentAttacks: {fileID: 11400000, guid: f733c37729191b6488f08ce2a9e470ac, type: 2}
+  currentAttacks: {fileID: 0}
   currentRecoveryTime: 0
   damagePlayer: 25
 --- !u!195 &1554744893

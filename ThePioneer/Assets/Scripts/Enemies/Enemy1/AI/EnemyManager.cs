@@ -45,25 +45,14 @@ namespace MV {
 
         }
         private void Update() {
-            HandleCurrentAction();
+            HandleCurrentAction();   
             HandleRecoveryTimer();
            
 
         }
 
         private void HandleCurrentAction() {
-            /*
-            if (enemyLocomotionManager.seeIt == true) {
-                if (enemyLocomotionManager.distanceFromTargetAttack > enemyLocomotionManager.stoppingDistance) {
-
-                    enemyLocomotionManager.HandleMoveToTarget();
-                } //else if (enemyLocomotionManager.distanceFromTargetAttack <= enemyLocomotionManager.stoppingDistance) {
-                //    AttackTarget();
-               // }
-            } else {
-                enemyLocomotionManager.HandleDetection();
-            }
-            */
+        
             enemyLocomotionManager.IsDeathDontMove();
 
             if(enemyLocomotionManager.seeIt != true) {
@@ -75,9 +64,13 @@ namespace MV {
                    
                      if (enemyLocomotionManager.distanceFromTargetAttack > enemyLocomotionManager.stoppingDistance) {
                          enemyLocomotionManager.HandleMoveToTarget();
-                     } else if (enemyLocomotionManager.distanceFromTargetAttack <= 20f) {
+                     } 
+                    else if (enemyLocomotionManager.distanceFromTargetAttack <= 10f) {
                          AttackTarget();
-                     }
+                       
+
+
+                    }
                 }
                 
             }
@@ -92,12 +85,17 @@ namespace MV {
                 currentRecoveryTime -= Time.deltaTime;
 
             }
-            if(isPerformingAction) {
-                if(currentRecoveryTime <= 0) {
+            if (isPerformingAction) {
+                if (currentRecoveryTime <= 0) {
                     isPerformingAction = false;
                 }
             }
-          
+
+            //   if(currentRecoveryTime <= 0) {
+            //   isPerformingAction = false;
+            //   }
+
+
 
         }
 
@@ -106,8 +104,7 @@ namespace MV {
 
         private void AttackTarget() {
 
-            if (isPerformingAction) 
-                return;
+           
 
             if (currentAttacks == null) {
                 GetNewAttack();
@@ -121,69 +118,28 @@ namespace MV {
                 GetNewAttack();
             }
 
-            /*
-            if (currentAttacks == null) {
-                GetNewAttack();
-            } else {
-                isPerformingAction = true;
-                currentRecoveryTime = currentAttacks.recoveryTime;
-                enemyAnimatorManager.PlayTargetAnimation(currentAttacks.actionAnimation, true);
-                currentAttacks = null;
-            }
-            */
+            
         }
 
         private void GetNewAttack() {
-            Vector3 targetsDirection = enemyLocomotionManager.targetPlayer.position - transform.position;
-            float viewableAngle = Vector3.Angle(targetsDirection, transform.position);
-            enemyLocomotionManager.distanceFromTargetAttack = Vector3.Distance(enemyLocomotionManager.targetPlayer.position, transform.position);
-            int maxScore = 0;
-            
-
-            for(int i = 0; i < enemyAttacks.Length; i++) {
-                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
-
-                if(enemyLocomotionManager.distanceFromTargetAttack <= enemyAttackAction.maximunDistanceNeededToAttack 
-                    && enemyLocomotionManager.distanceFromTargetAttack >= enemyAttackAction.minimunDistanceNeededToAttack) {  
-
-                    if(viewableAngle <= enemyAttackAction.maximunAttackAngle
-                        && viewableAngle >= enemyAttackAction.minimunAttackAngle ) {
-
-                        maxScore += enemyAttackAction.attackScore;
-                    }
-                }
-            }
-
+       
+            int maxScore = 3;
+           
             int randomValue = Random.Range(0, maxScore);
-            int temporaryScore = 0;
+            
+                EnemyAttackAction enemyAttackAction = enemyAttacks[randomValue];
+            currentAttacks = enemyAttackAction;
 
-            for(int i = 0;i < enemyAttacks.Length;i++) {
-                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-                if (enemyLocomotionManager.distanceFromTargetAttack <= enemyAttackAction.maximunDistanceNeededToAttack
-                    && enemyLocomotionManager.distanceFromTargetAttack >= enemyAttackAction.minimunDistanceNeededToAttack) {
 
-                    if (viewableAngle <= enemyAttackAction.maximunAttackAngle
-                        && viewableAngle >= enemyAttackAction.minimunAttackAngle) {
 
-                        if(currentAttacks != null) 
-                            return;
 
-                            temporaryScore += enemyAttackAction.attackScore;
-
-                            if(temporaryScore > randomValue) {
-                                currentAttacks = enemyAttackAction;
-                            
-                            }
-                    }
-                }
-            }
         }
 
-      
+
         #endregion
 
-       
+
 
     }
 
