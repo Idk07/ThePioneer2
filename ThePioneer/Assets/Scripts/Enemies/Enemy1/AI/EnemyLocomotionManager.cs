@@ -10,10 +10,12 @@ namespace MV {
         EnemyManager enemyManager;
         EnemyAnimatorManager enemyAnimatorManager;
         EnemyStats enemyStats;
+       
         private NavMeshAgent navMeshAgent;
         public Rigidbody enemyRigidBody;
+        public bool isDeath;
 
-        public Transform targetPlayer;
+       // public Transform targetPlayer;
 
         public float radius;
         [Range(0, 360)]
@@ -42,6 +44,8 @@ namespace MV {
             enemyRigidBody.isKinematic = false;
             canSeePlayer = false;
             seeIt = false;
+            isDeath = false;
+           
 
 
         }
@@ -55,6 +59,8 @@ namespace MV {
 
         }
 
+     
+
         private IEnumerator FOVRoutine() {
             WaitForSeconds wait = new WaitForSeconds(0f);
 
@@ -65,6 +71,11 @@ namespace MV {
         }
 
         public void HandleDetection() {
+            if(canSeePlayer == true) {
+                radius = 25f;
+            } else {
+                radius = 8.6f;
+            }
             Collider[] colliders = Physics.OverlapSphere(transform.position, radius, detectionLayer);
 
             if (colliders.Length != 0) {
@@ -90,37 +101,65 @@ namespace MV {
 
         }
 
-        public void HandleMoveToTarget() {
+        public void HandleMoveToTarget(bool camina) {
             
-            if(seeIt == false) 
-               return;
+           
             
 
-            Vector3 targetDirection = targetPlayer.position - transform.position;
-            distanceFromTargetAttack2 = Vector3.Distance(targetPlayer.position, transform.position);
+            Vector3 targetDirection = playerRef.transform.position - transform.position;
+            distanceFromTargetAttack2 = Vector3.Distance(playerRef.transform.position, transform.position);
             float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
+            if (enemyManager.isPerformingAction == true) {
+             
+                navMeshAgent.enabled = false;
+                enemyAnimatorManager.anim.SetBool("IsWalking", false);
+                    
+
+
+            } else {
+              
+                if(camina == true) {
+                    if (distanceFromTargetAttack2 >= 1.5f) {
+                        navMeshAgent.enabled = true;
+                        HandleRotateTowardsTarget();
+                        enemyAnimatorManager.anim.SetBool("IsWalking", true);
+                        //  HandleRotateTowardsTarget();
+                    }
+                } else  {
+                    
+                    navMeshAgent.enabled = false;
+                    enemyAnimatorManager.anim.SetBool("IsWalking", false);
+
+
+                }
+            }
+
+
+            /*
             if (enemyManager.isPerformingAction == true) {
                 navMeshAgent.enabled = false;
                 enemyAnimatorManager.anim.SetBool("IsWalking",false);
                 
                 
             } else {
+             
                
-                if(distanceFromTargetAttack2 >= 1.5f) {
+                if(distanceFromTargetAttack2 >= 1.5f && canSeePlayer == true) {
                   
                     enemyAnimatorManager.anim.SetBool("IsWalking", true);
                   //  HandleRotateTowardsTarget();
 
-                } else {
-                   
+                } else{
+                    print("no se mueve");
                     enemyAnimatorManager.anim.SetBool("IsWalking", false);
                    
                    
                 }
             }
+            */
+
             
-           HandleRotateTowardsTarget();
 
          //navMeshAgent.transform.localPosition = Vector3.zero;
          //  navMeshAgent.transform.localRotation = Quaternion.identity;
@@ -133,7 +172,7 @@ namespace MV {
         public void HandleRotateTowardsTarget() {
             //Rotate manually
             if(enemyManager.isPerformingAction) {
-                Vector3 direction = targetPlayer.position - transform.position;
+                Vector3 direction = playerRef.transform.position - transform.position;
                 direction.y = 0;
                 direction.Normalize();
 
@@ -148,7 +187,7 @@ namespace MV {
                 Vector3 targetVelocity = enemyRigidBody.velocity;
 
                 navMeshAgent.enabled = true;
-                navMeshAgent.SetDestination(targetPlayer.position);
+                navMeshAgent.SetDestination(playerRef.transform.position);
                    
                 enemyRigidBody.velocity = targetVelocity;
                 transform.rotation = Quaternion.Slerp(transform.rotation, navMeshAgent.transform.rotation, rotationSpeed *Time.deltaTime);
@@ -157,9 +196,18 @@ namespace MV {
 
         public void IsDeathDontMove() {
             if( enemyStats.currentHealth == 0 ) {
+                isDeath = true;
                 navMeshAgent.enabled = false;
                 navMeshAgent.updateRotation = false;
             }
+        }
+
+        public void DontMove() {
+           
+                
+                navMeshAgent.enabled = false;
+                navMeshAgent.updateRotation = false;
+            
         }
     }
 }

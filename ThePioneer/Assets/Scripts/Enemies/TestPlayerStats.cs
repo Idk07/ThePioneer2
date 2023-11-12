@@ -8,7 +8,7 @@ namespace MV {
         public int maxHealth;
         public int currentHealth;
 
-        public HealthBar healthBar;
+        public HealthBar1 healthBar;
 
         void Start() {
             maxHealth = SetMaxHealthFromHealthLevel();

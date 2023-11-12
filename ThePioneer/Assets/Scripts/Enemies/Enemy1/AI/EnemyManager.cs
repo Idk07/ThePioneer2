@@ -11,6 +11,7 @@ namespace MV {
         public static EnemyManager instanceEnemyManager;
 
         public bool isPerformingAction;
+       
 
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttacks;
@@ -19,8 +20,8 @@ namespace MV {
 
 
         public int damagePlayer = 25;
-        private bool isRecover;
-        private bool attackNoStop;
+        public bool entroBoss;
+       
 
         [Header("A.I Settings")]
 
@@ -31,6 +32,9 @@ namespace MV {
 
         private void Start() {
             instanceEnemyManager = this;
+            entroBoss = false;
+        
+            
         }
 
 
@@ -45,17 +49,41 @@ namespace MV {
 
         }
         private void Update() {
-            HandleCurrentAction();   
-            HandleRecoveryTimer();
-           
+          
+           HandleCurrentAction();           
+           HandleRecoveryTimer();     
+          
+
 
         }
 
         private void HandleCurrentAction() {
-        
-            enemyLocomotionManager.IsDeathDontMove();
+            
 
-            if(enemyLocomotionManager.seeIt != true) {
+            enemyLocomotionManager.HandleDetection();
+
+            enemyLocomotionManager.IsDeathDontMove();
+          
+            if (enemyLocomotionManager.isDeath == false) { 
+                if (enemyLocomotionManager.canSeePlayer == true ) {
+                    if (isPerformingAction != true) {
+
+                        if (enemyLocomotionManager.distanceFromTargetAttack > enemyLocomotionManager.stoppingDistance) {
+                            enemyLocomotionManager.HandleMoveToTarget(true);
+                        } else if (enemyLocomotionManager.distanceFromTargetAttack <= 10f) {
+                            AttackTarget();                           
+
+                            
+                        }
+                    }
+                } else {
+                   
+                        enemyLocomotionManager.HandleMoveToTarget(false);
+                    
+                }
+            }
+        /*
+            if(enemyLocomotionManager.canSeePlayer != true) {
                 enemyLocomotionManager.HandleDetection();
                 
             }else {
@@ -74,6 +102,8 @@ namespace MV {
                 }
                 
             }
+
+            */
             
           
 
@@ -81,6 +111,29 @@ namespace MV {
 
         private void HandleRecoveryTimer() { 
 
+
+            if(currentRecoveryTime > 0) {
+                currentRecoveryTime -= Time.deltaTime;                
+
+            }
+            if (isPerformingAction) {
+                if (currentRecoveryTime <= 0) {
+                    isPerformingAction = false;
+
+                }
+            }
+
+            /*
+            if (isPerformingAction) {
+                if (currentRecoveryTime <= 0) {
+                    isPerformingAction = false;
+                
+                }
+            }
+            */
+
+
+            /*
             if(currentRecoveryTime > 0) {
                 currentRecoveryTime -= Time.deltaTime;
 
@@ -94,28 +147,30 @@ namespace MV {
             //   if(currentRecoveryTime <= 0) {
             //   isPerformingAction = false;
             //   }
-
+            */
 
 
         }
 
-
+       
+       
         #region Attacks
 
         private void AttackTarget() {
 
-           
+         
 
             if (currentAttacks == null) {
                 GetNewAttack();
-                
+                     
+
             } else {
                 //GetNewAttack();
-                isPerformingAction = true;
-                currentRecoveryTime = currentAttacks.recoveryTime;
+                isPerformingAction = true;               
+                currentRecoveryTime = currentAttacks.recoveryTime;               
                 enemyAnimatorManager.PlayTargetAnimation(currentAttacks.actionAnimation, true);
                 currentAttacks = null;
-                GetNewAttack();
+                //GetNewAttack();
             }
 
             
@@ -130,15 +185,14 @@ namespace MV {
                 EnemyAttackAction enemyAttackAction = enemyAttacks[randomValue];
             currentAttacks = enemyAttackAction;
 
-
-
-
-
         }
+
+
 
 
         #endregion
 
+        
 
 
     }

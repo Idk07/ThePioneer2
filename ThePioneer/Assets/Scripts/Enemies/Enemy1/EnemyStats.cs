@@ -27,11 +27,7 @@ namespace MV {
             healthBar.SetMaxHealth(maxHealth);
         }
 
-        private void Update() {
-            if(Input.GetKeyUp(KeyCode.L)) {
-                Damage(50);
-            }
-        }
+      
 
         private int SetMaxHealthFromHealthLevel() {
             maxHealth = healthLevel * 10;
@@ -45,6 +41,9 @@ namespace MV {
             if(currentHealth <= 0) {
                 currentHealth = 0;
                 enemyAnimatorManager.PlayTargetAnimation("Death", true);
+              
+                PuntosdeExperiencia.instancePuntosDeExperiencia.SumaDeExperiencia(50);
+                
             }
         }
 
