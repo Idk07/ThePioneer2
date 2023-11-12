@@ -8,20 +8,23 @@ namespace MV {
         public int maxHealth;
         public int currentHealth;
 
+        public HealthBar healthBar;
+
         void Start() {
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
-
+            healthBar.SetMaxHealth(maxHealth);
         }
 
         private int SetMaxHealthFromHealthLevel() {
             maxHealth = healthLevel * 10;
             return maxHealth;
+            
         }
 
         public void Damage(int damage) {
             currentHealth = currentHealth - damage;
-
+            healthBar.SetCurrentHealth(currentHealth);
             if (currentHealth <= 0) {
                 currentHealth = 0;
             }
