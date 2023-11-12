@@ -2028,7 +2028,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1554744886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d9ca8c87e11a4346946fd08159f8478, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b4339199ce1f31428db1a09c4fed06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthLevel: 10
@@ -2073,7 +2073,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1554744886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3574c5b2f81925244a9c22ebd5b618f0, type: 3}
+  m_Script: {fileID: 11500000, guid: f541867d4340bc74bbfd4aa3743eb498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isPerformingAction: 0
