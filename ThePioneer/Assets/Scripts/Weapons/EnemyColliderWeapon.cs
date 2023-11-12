@@ -8,6 +8,8 @@ public class EnemyColliderWeapon : MonoBehaviour {
     public int damage = 20;
     Collider damageCollider;
 
+    public EnemyManager script;
+
     private void Awake() {
 
         damageCollider = GetComponent<Collider>();
@@ -29,12 +31,12 @@ public class EnemyColliderWeapon : MonoBehaviour {
     }
 
     private void Update() {
-
-        if (EnemyManager.instanceEnemyManager.isPerformingAction == false) {
+     
+        if (script.isPerformingAction == false) {
             DisableDamageTrigger();
 
         }
-        if (EnemyManager.instanceEnemyManager.isPerformingAction == true) {
+        if (script.isPerformingAction == true) {
             EnableDamageTrigger();
 
 
@@ -42,12 +44,12 @@ public class EnemyColliderWeapon : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider collision) {
-      /*  if (EnemyManager.instanceEnemyManager.isPerformingAction == false) {
+        if (script.isPerformingAction == false) {
             return;
         }
-      */
+      
 
-        //  print("WeaponEnemy:TocoAlgo");
+     
         if (collision.CompareTag("Player")) {
             TestPlayerStats playerStats = collision.GetComponent<TestPlayerStats>();
 

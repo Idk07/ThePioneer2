@@ -9,12 +9,14 @@ public class BoosEntrada : MonoBehaviour
     public GameObject puerta;
     public Transform target;
     Collider colliderVentana;
-
+    public bool muestraBarra;
+    public static BoosEntrada instanceBossEntrada;
  
 
     private void Start() {
         colliderVentana = GetComponent<Collider>();
         colliderVentana.isTrigger = true;
+        instanceBossEntrada = this;
         
     }
 
@@ -43,6 +45,7 @@ public class BoosEntrada : MonoBehaviour
     IEnumerator wait() {
         yield return new WaitForSeconds(2f);
         colliderVentana.isTrigger = false;
+        muestraBarra = true;
       
 
     }

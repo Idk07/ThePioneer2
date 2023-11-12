@@ -9657,6 +9657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  script: {fileID: 8002859989978476229}
 --- !u!1 &4840826691407095837
 GameObject:
   m_ObjectHideFlags: 0
@@ -16584,8 +16585,7 @@ MonoBehaviour:
   currentAttacks: {fileID: 0}
   currentRecoveryTime: 0
   damagePlayer: 25
-  waitIsPerformingAction: 0
-  waitTime: 0
+  entroBoss: 0
 --- !u!114 &8002859989978476226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16627,6 +16627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9ca8c87e11a4346946fd08159f8478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vidaBarraEnemigo: {fileID: 8002859991947388172}
+  collider: {fileID: 8002859989978476238}
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
@@ -16910,6 +16912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 8002859990753647540}
+  cam: {fileID: 0}
 --- !u!1 &8002859991947388172
 GameObject:
   m_ObjectHideFlags: 0

@@ -381,6 +381,7 @@
 "Assets/Scripts/UI/MainMenuUI.cs"
 "Assets/Scripts/UI/PauseMenuManager.cs"
 "Assets/Scripts/UI/PuntosdeExperiencia.cs"
+"Assets/Scripts/UI/UIBossVidaBarra.cs"
 "Assets/Scripts/Weapons/DamageCollider.cs"
 "Assets/Scripts/Weapons/EnemyColliderWeapon.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

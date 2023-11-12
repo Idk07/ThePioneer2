@@ -72,7 +72,7 @@ namespace MV {
 
         public void HandleDetection() {
             if(canSeePlayer == true) {
-                radius = 25f;
+                radius = 30f;
             } else {
                 radius = 8.6f;
             }
