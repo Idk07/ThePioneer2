@@ -47,8 +47,24 @@ public class DamageCollider : MonoBehaviour
 
                     }
             
-                }          
-     }
+                }
+            if (collision.CompareTag("Player"))
+            {
+                PlayerStats playerStats = collision.GetComponent<PlayerStats>();
+
+                print("Weapon:TocoAlPlayer");
+
+                if (playerStats != null)
+                {
+                    //el valor de damage se debe de sustituir por un script de CurrentWeaponDamage
+                    playerStats.TakeDamage(damage);
+                    print("Weapon:HizoDañoAlPlayer");
+
+
+                }
+
+            }
+        }
 }
 
 }
